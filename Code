@@ -2,28 +2,55 @@ import newspaper
 from newspaper import Article
 
 
+#Prototype
+
+
 
 count = 0
-paragraph = str(input("add paragraph pls "))
+
+product = ""
+
+def Article_Citer():
+    url = ""
+    while url == "":
+        url = input("please input url for the quote:" + '"' + split_graph[count] + '" : ')
+    a = Article(url)
+
+    count2 = 0
+    a.download()
+    a.parse()
+    
+    name = a.authors[0]
+    #this function ^^^ does not work for alot of news (cbc, bbc) websites EXECPT the toronto star and I don't know why, but we have no time and no better option so its staying
+    final_name = name.split()[1]
+    date = a.publish_date
+    date = ", " + str(date)
+    if date == ", None":
+        date = ""
+
+    total = "(" + str(final_name) + str(date) + ")"
+
+    final_paragraph.insert(count, '"')
+    final_paragraph.insert(count+2, '"')
+    final_paragraph.insert(count+3, total)
+
+    
+
+paragraph = str(input("Paste your paragraph here: "))
 split_graph = paragraph.split('"')
+final_paragraph = paragraph.split('"')
 
 for i in split_graph:
-    count += 1
-    if count % 2 == 0:
-        url = input("please input url")
-        a = Article(url)
-
-        count2 = 0
-        a.download()
-        a.parse()
-
-        name = a.authors[0]
-        final_name = name.split()[1]
-        date = a.publish_date
-
-        total = str("(" + final_name + "," + date + ")")
-
-        split_graph.insert(count + 1, )
-        print (split_graph)
+    if count % 2 == 1:
+       Article_Citer()
     else:
-        print ("cooln't")
+        pass
+    count += 1
+    
+    
+
+for i in final_paragraph:
+    product = product + str(i)
+    
+
+print("this is your final product:  " + product)
