@@ -1,0 +1,29 @@
+import newspaper
+from newspaper import Article
+
+
+
+count = 0
+paragraph = str(input("add paragraph pls "))
+split_graph = paragraph.split('"')
+
+for i in split_graph:
+    count += 1
+    if count % 2 == 0:
+        url = input("please input url")
+        a = Article(url)
+
+        count2 = 0
+        a.download()
+        a.parse()
+
+        name = a.authors[0]
+        final_name = name.split()[1]
+        date = a.publish_date
+
+        total = str("(" + final_name + "," + date + ")")
+
+        split_graph.insert(count + 1, )
+        print (split_graph)
+    else:
+        print ("cooln't")
